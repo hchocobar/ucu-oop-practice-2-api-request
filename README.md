@@ -1,6 +1,6 @@
-# UCU - Práctica 3: Webscraping
+# UCU - Práctica 2: API request
 
-Webscraping - Proyecto para la Licenciatura en Datos y Negocios
+API request - Proyecto para la Licenciatura en Datos y Negocios
 
 ## **Modalidad de presentación**
 
