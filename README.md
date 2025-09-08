@@ -1,96 +1,118 @@
-# UCU - Práctica 2: API request
+# Práctica de API request
 
-API request - Proyecto para la Licenciatura en Datos y Negocios
+Este repositorio contiene el enunciado de la práctica de API request
 
 ## **Modalidad de presentación**
 
 1. Debes crear un nuevo repositorio en tu cuenta de GitHub a partir de este Template. Para ello utiliza el botón "Utilizar este template"
-2. Luego en tu repositorio, debes editar el archivo `project.ipynb` para resolver el proyecto.
+2. Luego en tu repositorio, debes editar el archivo `project.ipynb` que se encuentra en el directorio `notebooks` para resolver el proyecto.
 3. Finalmente, presentar en WebAsignatura el enlace de tu repositorio.
 
-## **Descripción del proyecto:**
+## **Criterios de evaluación**
 
-Eres parte de un equipo de análisis de datos encargado de investigar y comparar los precios de compra de casas en distintas ciudades de Uruguay. Para ello, deberás **scrapear** una página web inmobiliaria que provea datos de propiedades en venta, como los precios, la ubicación y otros detalles relevantes.
+- **PEP 8:** El código debe seguir las pautas de estilo de **PEP 8**.
+- **Markdown:** El notebook `project.ipynb` debe estar bien documentado usando **Markdown** para explicar cada paso y los resultados obtenidos.
+- **Funcionalidad:** Todas las tareas deben estar resueltas correctamente.
 
-Tu objetivo es realizar un **scraping** de los datos de las propiedades en venta en distintas ciudades de Uruguay y almacenarlos en un archivo **JSON** para su posterior análisis.
+## Enunciado
 
-## **Requisitos del ejercicio:**
+### **Introducción**
 
-1. **Página web objetivo**: Utiliza una página web inmobiliaria de Uruguay que permita acceso público a sus listados de propiedades.
+Eres parte de un equipo de análisis de datos encargado de investigar tendencias en la industria de la música. Por ello, deberás recolectar datos de API relacionadas con la industria.
 
-2. **Datos a extraer**:
-   
-   - **Ciudad**: Ciudad donde está ubicada la propiedad.
-   - **Precio**: Precio de la propiedad en dólares (USD).
-   - **Tamaño**: Tamaño de la propiedad en metros cuadrados (si está disponible).
-   - **Número de habitaciones**: Cantidad de dormitorios (si está disponible).
-   - **Link**: Enlace a la página del anuncio de la propiedad.
+Tu objetivo es **consumir** la API de Spotify para obtener datos de tendencias musicales.
 
-3. **Recolección de datos**:
-   
-   - Realiza scraping de las propiedades en al menos **tres ciudades diferentes** de Uruguay.
-   - Extrae al menos **10 propiedades por ciudad**.
+### **Tarea 1**
 
-4. **Almacenamiento de datos**:
-   
-   - Los datos extraídos deben almacenarse en un archivo JSON con la siguiente estructura:
-     
-     ```json
-     {
-       "ciudades": [
-         {
-           "nombre": "Montevideo",
-           "propiedades": [
-             {
-               "precio": 250000,
-               "tamano": 150,
-               "habitaciones": 3,
-               "link": "https://www.ejemplo.com/propiedad1"
-             },
-             {
-               "precio": 180000,
-               "tamano": 120,
-               "habitaciones": 2,
-               "link": "https://www.ejemplo.com/propiedad2"
-             }
-           ]
-         },
-         {
-           "nombre": "Punta del Este",
-           "propiedades": [
-             {
-               "precio": 320000,
-               "tamano": 180,
-               "habitaciones": 4,
-               "link": "https://www.ejemplo.com/propiedad3"
-             }
-           ]
-         }
-       ]
-     }
-     ```
+Crea una aplicación para desarrolladores de Spotify mediante el portal para desarrolladores.
 
-5. **Requisitos técnicos**:
-   
-   - Utiliza la librería **`requests`** para hacer las solicitudes HTTP.
-   - Utiliza la librería **`BeautifulSoup`** para analizar el HTML de la página.
-   - Almacena los datos extraídos en un archivo **JSON** llamado `propiedades.json`.
+### **Tarea 2**
 
-6. **Formato de entrega**:
-   
-   - Entrega el código Python que realiza el scraping y la extracción de datos en el archivo `project.ipynb` de Jupiter Netbook.
-   - Incluye el archivo `propiedades.json` con los resultados del scraping.
+Conéctate con la API de Spotify utilizando Python.
+  
+### **Tarea 3**
+
+De tu artista favorito recupera el top 10 de sus canciones, generando una lista de diccionarios que incluirán las claves 'song', 'popularity' y 'duration'. Para ello, tendrás que buscar el ID del artista.
+
+Salida esperada:
+```python
+[{'song': 'Nos Siguen Pegando Abajo', 'popularity': 67, 'duration': 206720},
+ {'song': 'Demoliendo Hoteles', 'popularity': 66, 'duration': 135973},
+ {'song': 'No Voy en Tren', 'popularity': 63, 'duration': 181600},
+ {'song': 'Promesas Sobre El Bidet', 'popularity': 64, 'duration': 164360},
+ {'song': 'Hablando a Tu Corazón', 'popularity': 63, 'duration': 255266},
+ {'song': 'No Me Dejan Salir', 'popularity': 62, 'duration': 263200},
+ {'song': 'Raros Peinados Nuevos', 'popularity': 60, 'duration': 214760},
+ {'song': 'Tu Amor', 'popularity': 60, 'duration': 186466},
+ {'song': 'Rezo por Vos', 'popularity': 59, 'duration': 269053},
+ {'song': 'Los Dinosaurios', 'popularity': 57, 'duration': 208093}]
+```
 
 ## **Pistas para la implementación**:
 
-- Investiga en la web inmobiliaria seleccionada cómo están estructurados los datos de las propiedades (ej. etiqueta `<div>`, clases, etc.).
-- Asegúrate de que el scraping respete los términos y condiciones de la página web que selecciones.
-- Utiliza **`try-except`** para manejar posibles errores de conexión o de acceso a los elementos HTML.
-- La estructura HTML puede variar según la página web, así que analiza cuidadosamente cómo están organizados los precios, la ubicación y los enlaces.
+### Paso 1 - Crear una cuenta de desarrollador en Spotify
 
-## **Criterios de evaluación**:
+Antes de comenzar a programar, necesitas tener acceso a las credenciales de desarrollador de Spotify. Visita: https://developer.spotify.com
 
-- Correcta implementación del scraping y extracción de los datos solicitados.
-- Manejo eficiente de errores y control de excepciones.
-- Formato correcto del archivo JSON generado.
-- Calidad y claridad del código Python.
+- Inicia sesión con tu cuenta de Spotify (o crea una si aún no tienes una).
+- Ve a Dashboard y haz clic en Create an App. Completa los campos requeridos. En Redirect URI, escribe: https://localhost/
+
+<img src="./assets/spotify-for-developers.png" width="640"/>
+
+Después que hayas creado la app, ingresa en la configuración para copiar tu Client ID y Client Secret. Los usarás más adelante para autenticarte ante la API.
+
+### Paso 2 - Variables de Entorno
+
+Crea un archivo con el nombre `.env` en el directorio raíz del proyecto. Asegúrate de que contenga las siguientes variables con tus credenciales de Spotify (reemplaza el contenido con tus propios datos):
+
+```text
+CLIENT_ID=your_client_id
+CLIENT_SECRET=your_client_secret
+```
+
+> ⚠️ Es importante que coloques tus datos en las variables de entorno para evitar exponer tus credenciales si subes el proyecto a un repositorio.
+
+Ahora, en el archivo project.ipynb, agrega el siguiente código para leer las variables de entorno:
+
+```python
+import os
+from dotenv import load_dotenv
+
+# load the .env file variables
+load_dotenv()
+
+# Get credential values
+client_id = os.getenv("CLIENT_ID")
+client_secret = os.getenv("CLIENT_SECRET")
+```
+
+Con esto, tus credenciales estarán listas para ser utilizadas en la autenticación con la API de Spotify.
+
+### Paso 3 - Inicializar la librería de Spotipy
+
+- Primero debes instalar la librería `Spotipy` y en PyCharm puedes realizarlo de dos maneras:
+  - Desde la terminal ejecutando el comando `pip install spotipy`
+  - Desde Python Package, buscando spotipy y haciendo click en `install`
+- Segundo, en el archivo `project.ipynb` debes importar spotipy y realizar la conexión con la API
+
+```python
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+
+auth_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
+spotify = spotipy.Spotify(auth_manager=auth_manager)
+```
+
+> Documentación: Puedes guiarte con la siguiente documentación [https://spotipy.readthedocs.io/](https://spotipy.readthedocs.io/)
+
+### Paso 4: Ya tienes acceso a la API
+
+Puedes comenzar a interactuar con la API de Spotify.
+
+### Paso 5: Encontrando el Artist-ID
+
+El ID de un artista es su identificador que puedes obtenerlo de la dirección web que tiene el artista en Spotify.
+
+Ejemplo:
+
+<img src="./assets/spotify-artist-id.png" width="640"/>
