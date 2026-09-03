@@ -13,106 +13,176 @@ Este repositorio contiene el enunciado de la práctica de API request
 - **PEP 8:** El código debe seguir las pautas de estilo de **PEP 8**.
 - **Markdown:** El notebook `project.ipynb` debe estar bien documentado usando **Markdown** para explicar cada paso y los resultados obtenidos.
 - **Funcionalidad:** Todas las tareas deben estar resueltas correctamente.
+- **Requests:** Utilización correcta de la biblioteca `requests` para realizar la consulta HTTP.
+- **JSON:** Correcta interpretación y manipulación de la respuesta JSON.
+- **Python:** Uso adecuado de: listas, diccionarios, ciclos, funciones, comprensión de listas, cuando resulte apropiado
 
-## Enunciado
+## Práctica: GitHub API — Análisis de repositorios
 
 ### **Introducción**
 
-Eres parte de un equipo de análisis de datos encargado de investigar tendencias en la industria de la música. Por ello, deberás recolectar datos de API relacionadas con la industria.
+Eres parte de un equipo de análisis de datos encargado de estudiar la actividad y popularidad de proyectos de software desarrollados en GitHub.
 
-Tu objetivo es **consumir** la API de Spotify para obtener datos de tendencias musicales.
+Tu objetivo será **consumir la API REST de GitHub utilizando Python**, obtener información de los repositorios públicos de un usuario y transformar los datos obtenidos para realizar un pequeño análisis.
 
-### **Tarea 1**
-
-Crea una aplicación para desarrolladores de Spotify mediante el portal para desarrolladores.
-
-### **Tarea 2**
-
-Conéctate con la API de Spotify utilizando Python.
-  
-### **Tarea 3**
-
-De tu artista favorito recupera el top 10 de sus canciones, generando una lista de diccionarios que incluirán las claves 'song', 'popularity' y 'duration'. Para ello, tendrás que buscar el ID del artista.
-
-Salida esperada:
-```python
-[{'song': 'Nos Siguen Pegando Abajo', 'popularity': 67, 'duration': 206720},
- {'song': 'Demoliendo Hoteles', 'popularity': 66, 'duration': 135973},
- {'song': 'No Voy en Tren', 'popularity': 63, 'duration': 181600},
- {'song': 'Promesas Sobre El Bidet', 'popularity': 64, 'duration': 164360},
- {'song': 'Hablando a Tu Corazón', 'popularity': 63, 'duration': 255266},
- {'song': 'No Me Dejan Salir', 'popularity': 62, 'duration': 263200},
- {'song': 'Raros Peinados Nuevos', 'popularity': 60, 'duration': 214760},
- {'song': 'Tu Amor', 'popularity': 60, 'duration': 186466},
- {'song': 'Rezo por Vos', 'popularity': 59, 'duration': 269053},
- {'song': 'Los Dinosaurios', 'popularity': 57, 'duration': 208093}]
-```
-
-## **Pistas para la implementación**:
-
-### Paso 1 - Crear una cuenta de desarrollador en Spotify
-
-Antes de comenzar a programar, necesitas tener acceso a las credenciales de desarrollador de Spotify. Visita: https://developer.spotify.com
-
-- Inicia sesión con tu cuenta de Spotify (o crea una si aún no tienes una).
-- Ve a Dashboard y haz clic en Create an App. Completa los campos requeridos. En Redirect URI, escribe: https://localhost/
-
-<img src="./assets/spotify-for-developers.png" width="640"/>
-
-Después que hayas creado la app, ingresa en la configuración para copiar tu Client ID y Client Secret. Los usarás más adelante para autenticarte ante la API.
-
-### Paso 2 - Variables de Entorno
-
-Crea un archivo con el nombre `.env` en el directorio raíz del proyecto. Asegúrate de que contenga las siguientes variables con tus credenciales de Spotify (reemplaza el contenido con tus propios datos):
+La API de GitHub permite consultar los repositorios públicos de un usuario mediante el endpoint:
 
 ```text
-CLIENT_ID=your_client_id
-CLIENT_SECRET=your_client_secret
+/users/{username}/repos
 ```
 
-> ⚠️ Es importante que coloques tus datos en las variables de entorno para evitar exponer tus credenciales si subes el proyecto a un repositorio.
+La consulta puede realizarse sin autenticación cuando se trabaja únicamente con recursos públicos.
 
-Ahora, en el archivo project.ipynb, agrega el siguiente código para leer las variables de entorno:
+---
+
+#### Tarea 1 — Realizar una consulta a GitHub
+
+Utiliza Python para consultar la API de GitHub y obtener los repositorios públicos de un usuario.
+
+Puedes utilizar, por ejemplo:
+
+```text
+torvalds
+```
+
+o cualquier otro usuario de GitHub.
+
+La respuesta de la API contiene información como:
+
+* nombre del repositorio
+* descripción
+* lenguaje principal
+* cantidad de estrellas
+* cantidad de forks
+* cantidad de issues
+* fecha de creación
+* fecha de última actualización
+* URL del repositorio
+
+---
+
+#### Tarea 2 — Crear una lista de repositorios
+
+A partir de la respuesta obtenida, crea una lista de diccionarios que contenga únicamente las siguientes claves:
 
 ```python
-import os
-from dotenv import load_dotenv
-
-# load the .env file variables
-load_dotenv()
-
-# Get credential values
-client_id = os.getenv("CLIENT_ID")
-client_secret = os.getenv("CLIENT_SECRET")
+[{"name": "...",
+  "language": "...",
+  "stars": 123,
+  "forks": 45},
+ {"name": "...",
+  "language": "...",
+  "stars": 12,
+  "forks": 5},
+ {...}]
 ```
 
-Con esto, tus credenciales estarán listas para ser utilizadas en la autenticación con la API de Spotify.
+Los valores deberán obtenerse directamente de la respuesta de la API.
 
-### Paso 3 - Inicializar la librería de Spotipy
+---
 
-- Primero debes instalar la librería `Spotipy` y en PyCharm puedes realizarlo de dos maneras:
-  - Desde la terminal ejecutando el comando `pip install spotipy`
-  - Desde Python Package, buscando spotipy y haciendo click en `install`
-- Segundo, en el archivo `project.ipynb` debes importar spotipy y realizar la conexión con la API
+#### Tarea 3 — Analizar los repositorios
+
+Utilizando la lista obtenida en la tarea anterior, responde mediante Python:
+
+##### 3.1 Repositorio más popular
+
+Determina cuál es el repositorio que tiene mayor cantidad de estrellas.
+
+La salida esperada deberá tener un formato similar a:
+
+```text
+Most popular repository: xxx
+Stars: 12345
+```
+
+##### 3.2 Lenguajes utilizados
+
+Obtén los diferentes lenguajes de programación utilizados en los repositorios.
+
+Por ejemplo:
+
+```text
+Languages:
+- C
+- C++
+- Python
+- JavaScript
+```
+
+##### 3.3 Cantidad de repositorios por lenguaje
+
+Calcula cuántos repositorios utilizan cada lenguaje.
+
+Resultado esperado:
+
+```text
+C: 5
+Python: 3
+JavaScript: 2
+C++: 1
+```
+
+---
+
+## Pistas para la implementación
+
+### Paso 1 — Consultar la API
+
+Puedes utilizar la biblioteca `requests`:
 
 ```python
-import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
+import requests
 
-auth_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
-spotify = spotipy.Spotify(auth_manager=auth_manager)
+url = "https://api.github.com/users/torvalds/repos"
+
+response = requests.get(url)
+
+response.raise_for_status()
+
+data = response.json()
 ```
 
-> Documentación: Puedes guiarte con la siguiente documentación [https://spotipy.readthedocs.io/](https://spotipy.readthedocs.io/)
+---
 
-### Paso 4: Ya tienes acceso a la API
+### Paso 2 — Explorar la respuesta
 
-Puedes comenzar a interactuar con la API de Spotify.
+Antes de comenzar a procesar los datos, analiza la estructura de la respuesta.
 
-### Paso 5: Encontrando el Artist-ID
+Puedes consultar:
 
-El ID de un artista es su identificador que puedes obtenerlo de la dirección web que tiene el artista en Spotify.
+```python
+type(data)
+```
 
-Ejemplo:
+y:
 
-<img src="./assets/spotify-artist-id.png" width="640"/>
+```python
+len(data)
+```
+
+También puedes inspeccionar uno de los elementos:
+
+```python
+data[0]
+```
+
+---
+
+### Paso 3 — Crear la lista de diccionarios
+
+Recorre los resultados y selecciona únicamente la información necesaria.
+
+Por ejemplo:
+
+```python
+repositories = []
+
+for repository in data:
+    repositories.append({"name": repository["name"],
+                         "language": repository["language"],
+                         "stars": repository["stargazers_count"],
+                         "forks": repository["forks_count"]})
+```
+
+**No es necesario utilizar exactamente este código.** El objetivo es que construyas tu propia solución.
